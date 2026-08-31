@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orders | DRIPSTARS.COM Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <!-- ============ ACCESS CHECK SCREEN ============ -->
+    <div class="access-screen" id="accessScreen">
+      <p id="accessMessage">Checking access...</p>
+    </div>
+
+    <!-- ============ DASHBOARD ============ -->
+    <div class="dashboard" id="dashboard" hidden>
+      <header class="admin-top">
+        <div class="admin-brand">
+          <strong>DRIPSTARS<span>.COM</span></strong>
+          <small>ORDER DASHBOARD</small>
+        </div>
+        <button class="btn btn-outline" id="signOutBtn">Sign out</button>
+      </header>
+
+      <main class="admin-main">
+        <section class="stat-row">
+          <div class="stat-card">
+            <span class="stat-label">Total orders</span>
+            <strong class="stat-value" id="statTotal">—</strong>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Today</span>
+            <strong class="stat-value" id="statToday">—</strong>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Pending</span>
+            <strong class="stat-value" id="statPending">—</strong>
+          </div>
+          <div class="stat-card">
+            <span class="stat-label">Revenue (all orders)</span>
+            <strong class="stat-value" id="statRevenue">—</strong>
+          </div>
+        </section>
+
+        <section class="toolbar">
+          <input
+            type="search"
+            id="orderSearch"
+            placeholder="Search by name, phone or order number..."
+          />
+          <select id="statusFilter">
+            <option value="All">All statuses</option>
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+          <button class="btn btn-outline dark-outline" id="refreshBtn">
+            Refresh
+          </button>
+        </section>
+
+        <section class="table-wrap">
+          <table class="orders-table">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="ordersBody">
+              <!-- rows injected by admin.js -->
+            </tbody>
+          </table>
+          <p class="empty-state" id="ordersEmpty" hidden>
+            No orders match your search.
+          </p>
+          <p class="loading-state" id="ordersLoading">Loading orders...</p>
+        </section>
+      </main>
+    </div>
+
+    <!-- ============ ORDER DETAIL DRAWER ============ -->
+    <aside class="detail-drawer" id="detailDrawer" aria-label="Order detail">
+      <div class="drawer-header">
+        <h2 id="detailOrderNumber">—</h2>
+        <button class="close-btn" id="detailClose">×</button>
+      </div>
+      <div class="drawer-body" id="detailBody"></div>
+    </aside>
+    <div class="overlay" id="overlay"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>

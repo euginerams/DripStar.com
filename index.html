@@ -1,197 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="DRIPSTARS.COM - Where Style Meets Tech. Shop phones, tablets and laptops." />
-  <title>DRIPSTARS.COM | Where Style Meets Tech</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <div class="announcement">Nationwide delivery available • WhatsApp orders welcome</div>
-
-  <header class="site-header">
-    <a class="brand" href="#home" aria-label="DRIPSTARS.COM home">
-      <span class="brand-mark">★</span>
-      <span>
-        <strong>DRIPSTARS<span>.COM</span></strong>
-        <small>WHERE STYLE MEETS TECH</small>
-      </span>
-    </a>
-
-    <nav class="desktop-nav" aria-label="Main navigation">
-      <a href="#home">Home</a>
-      <a href="#shop">Shop</a>
-      <a href="#phones">Phones</a>
-      <a href="#laptops">Laptops</a>
-      <a href="#tablets">Tablets</a>
-      <a href="#about">About</a>
-    </nav>
-
-    <div class="header-actions">
-      <button class="icon-btn" id="searchToggle" aria-label="Search">⌕</button>
-      <button class="cart-btn" id="cartOpen" aria-label="Open shopping cart">
-        Cart <span id="cartCount">0</span>
-      </button>
-      <button class="menu-btn" id="menuToggle" aria-label="Open menu">☰</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="DRIPSTARS.COM - Where Style Meets Tech. Shop phones, tablets and laptops."
+    />
+    <title>DRIPSTARS.COM | Where Style Meets Tech</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="announcement">
+      Nationwide delivery available • WhatsApp orders welcome
     </div>
-  </header>
 
-  <div class="search-panel" id="searchPanel">
-    <input id="searchInput" type="search" placeholder="Search phones, tablets, laptops..." />
-  </div>
+    <header class="site-header">
+      <a class="brand" href="#home" aria-label="DRIPSTARS.COM home">
+        <img
+          class="brand-mark"
+          src="logo.png"
+          alt="DRIPSTARS.COM logo"
+          onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'brand-mark brand-mark-fallback',textContent:'★'}))"
+        />
+        <span class="brand-text">
+          <strong>DRIPSTARS<span>.COM</span></strong>
+          <small>WHERE STYLE MEETS TECH</small>
+        </span>
+      </a>
 
-  <main id="home">
-    <section class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">TECH THAT FITS YOUR STYLE</p>
-        <h1>Upgrade your<br><span>everyday tech.</span></h1>
-        <p class="hero-text">
-          Shop phones, laptops and tablets from DRIPSTARS.COM.
-          Order online or use WhatsApp when you prefer a direct conversation.
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="#home">Home</a>
+        <a href="#shop">Shop</a>
+        <a href="#phones" data-filter="Phone">Phones</a>
+        <a href="#phones" data-filter="Laptop">Laptops</a>
+        <a href="#phones" data-filter="Tablet">Tablets</a>
+        <a href="#about">About</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="searchToggle" aria-label="Search">
+          ⌕
+        </button>
+        <a class="account-link" href="account.html" aria-label="My account"
+          >Account</a
+        >
+        <button class="cart-btn" id="cartOpen" aria-label="Open shopping cart">
+          <span class="cart-label">Cart</span> <span id="cartCount">0</span>
+        </button>
+        <button class="menu-btn" id="menuToggle" aria-label="Open menu">
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="search-panel" id="searchPanel">
+      <div class="search-box-wrap">
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Try 'Phone', 'Laptop', 'Tablet', or a product name..."
+          autocomplete="off"
+        />
+        <div class="search-suggestions" id="searchSuggestions" hidden></div>
+        <p class="search-invalid-msg" id="searchInvalidMsg" hidden>
+          No matches found. Try "Phone", "Laptop" or "Tablet".
         </p>
-        <div class="hero-actions">
-          <a class="btn btn-gold" href="#shop">Shop now</a>
-          <a class="btn btn-outline" href="https://wa.me/27838614484?text=Hi%20DRIPSTARS.COM%2C%20I%27d%20like%20to%20make%20an%20enquiry." target="_blank" rel="noopener">WhatsApp us</a>
-        </div>
       </div>
-      <div class="hero-visual">
-        <div class="gold-orbit orbit-one"></div>
-        <div class="gold-orbit orbit-two"></div>
-        <div class="hero-star">★</div>
-        <div class="hero-card">
-          <span>DRIPSTARS.COM</span>
-          <strong>WHERE<br>STYLE MEETS TECH</strong>
-        </div>
-      </div>
-    </section>
+    </div>
 
-    <section class="categories section" id="shop">
-      <div class="section-heading">
+    <main id="home">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">TECH THAT FITS YOUR STYLE</p>
+          <h1>Upgrade your<br /><span>everyday tech.</span></h1>
+          <p class="hero-text">
+            Shop phones, laptops and tablets from DRIPSTARS.COM. Order online or
+            use WhatsApp when you prefer a direct conversation.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-gold" href="#shop">Shop now</a>
+            <a
+              class="btn btn-outline"
+              href="https://wa.me/27838614484?text=Hi%20DRIPSTARS.COM%2C%20I%27d%20like%20to%20make%20an%20enquiry."
+              target="_blank"
+              rel="noopener"
+              >WhatsApp us</a
+            >
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="device-stack">
+            <div class="device device-tablet"></div>
+            <div class="device device-laptop"></div>
+            <div class="device device-phone">
+              <span class="device-notch"></span>
+            </div>
+            <div class="price-tag">
+              <span>DRIPSTARS</span>
+              <strong>Style meets tech</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="categories section" id="shop">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">SHOP BY CATEGORY</p>
+            <h2>Find your next device.</h2>
+          </div>
+        </div>
+        <div class="category-grid">
+          <button class="category-card" data-filter="Phone">
+            <span class="category-icon">📱</span>
+            <span
+              ><strong>Phones</strong><small>Smartphones & more</small></span
+            >
+          </button>
+          <button class="category-card" data-filter="Laptop">
+            <span class="category-icon">💻</span>
+            <span
+              ><strong>Laptops</strong
+              ><small>Work & everyday computing</small></span
+            >
+          </button>
+          <button class="category-card" data-filter="Tablet">
+            <span class="category-icon">▣</span>
+            <span><strong>Tablets</strong><small>Portable screens</small></span>
+          </button>
+        </div>
+      </section>
+
+      <section class="products section" id="phones">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">FEATURED STOCK</p>
+            <h2>Popular devices.</h2>
+          </div>
+          <div class="filter-row">
+            <button class="filter active" data-filter="All">All</button>
+            <button class="filter" data-filter="Phone">Phones</button>
+            <button class="filter" data-filter="Laptop">Laptops</button>
+            <button class="filter" data-filter="Tablet">Tablets</button>
+            <button class="filter-toggle" id="filterToggle">
+              Filters <span id="filterCount"></span> ▾
+            </button>
+          </div>
+        </div>
+
+        <div class="filter-panel" id="filterPanel" hidden>
+          <div class="filter-group">
+            <label for="sortSelect">Sort by</label>
+            <select id="sortSelect">
+              <option value="default">Featured</option>
+              <option value="name-asc">Name (A–Z)</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label>Condition</label>
+            <div class="checkbox-row">
+              <label
+                ><input type="checkbox" class="conditionCheck" value="New" />
+                New</label
+              >
+              <label
+                ><input
+                  type="checkbox"
+                  class="conditionCheck"
+                  value="Pre-owned"
+                />
+                Pre-owned</label
+              >
+            </div>
+          </div>
+          <div class="filter-group">
+            <label>Price range (R)</label>
+            <div class="price-inputs">
+              <input type="number" id="priceMin" placeholder="Min" min="0" />
+              <span>–</span>
+              <input type="number" id="priceMax" placeholder="Max" min="0" />
+            </div>
+          </div>
+          <div class="filter-actions">
+            <button
+              class="btn btn-outline dark-outline"
+              id="clearFilters"
+              type="button"
+            >
+              Clear
+            </button>
+            <button class="btn btn-gold" id="applyFilters" type="button">
+              Apply filters
+            </button>
+          </div>
+        </div>
+        <p class="result-count" id="resultCount"></p>
+        <div class="product-grid" id="productGrid"></div>
+        <p class="empty-state" id="emptyState" hidden>
+          No products match your search.
+        </p>
+      </section>
+
+      <section class="deal-banner" id="laptops">
         <div>
-          <p class="eyebrow">SHOP BY CATEGORY</p>
-          <h2>Find your next device.</h2>
+          <p class="eyebrow">LIMITED DEAL</p>
+          <h2>Lenovo IdeaPad 3<br /><span>R4,500</span></h2>
+          <p>i5 • 256GB SSD • 8GB RAM</p>
         </div>
-      </div>
-      <div class="category-grid">
-        <button class="category-card" data-filter="Phone">
-          <span class="category-icon">📱</span>
-          <span><strong>Phones</strong><small>Smartphones & more</small></span>
+        <div class="deal-device">LAPTOP</div>
+        <button class="btn btn-gold" onclick="addToCart(17)">
+          Add to cart
         </button>
-        <button class="category-card" data-filter="Laptop">
-          <span class="category-icon">💻</span>
-          <span><strong>Laptops</strong><small>Work & everyday computing</small></span>
-        </button>
-        <button class="category-card" data-filter="Tablet">
-          <span class="category-icon">▣</span>
-          <span><strong>Tablets</strong><small>Portable screens</small></span>
-        </button>
-      </div>
-    </section>
+      </section>
 
-    <section class="products section" id="phones">
-      <div class="section-heading">
+      <section class="trust section" id="about">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">WHY DRIPSTARS</p>
+            <h2>Simple shopping. Real support.</h2>
+          </div>
+        </div>
+        <div class="trust-grid">
+          <article>
+            <span>01</span>
+            <h3>Shop online</h3>
+            <p>Choose your products and build your order from the website.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>WhatsApp option</h3>
+            <p>
+              Prefer a direct conversation? Send your order or enquiry through
+              WhatsApp.
+            </p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Nationwide delivery</h3>
+            <p>
+              Delivery information can be confirmed with your order before
+              dispatch.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="contact-strip">
         <div>
-          <p class="eyebrow">FEATURED STOCK</p>
-          <h2>Popular devices.</h2>
+          <p class="eyebrow">NEED HELP?</p>
+          <h2>Talk to DRIPSTARS.COM.</h2>
         </div>
-        <div class="filter-row">
-          <button class="filter active" data-filter="All">All</button>
-          <button class="filter" data-filter="Phone">Phones</button>
-          <button class="filter" data-filter="Laptop">Laptops</button>
-          <button class="filter" data-filter="Tablet">Tablets</button>
+        <a
+          class="btn btn-gold"
+          href="https://wa.me/27838614484?text=Hi%20DRIPSTARS.COM%2C%20I%20need%20help%20with%20an%20order."
+          target="_blank"
+          rel="noopener"
+          >Chat on WhatsApp</a
+        >
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="brand footer-brand">
+        <img
+          class="brand-mark"
+          src="logo.png"
+          alt="DRIPSTARS.COM logo"
+          onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'brand-mark brand-mark-fallback',textContent:'★'}))"
+        />
+        <span class="brand-text"
+          ><strong>DRIPSTARS<span>.COM</span></strong
+          ><small>WHERE STYLE MEETS TECH</small></span
+        >
+      </div>
+      <div class="footer-links">
+        <a href="#shop">Shop</a>
+        <a href="#about">About</a>
+        <a href="https://wa.me/27838614484" target="_blank" rel="noopener"
+          >WhatsApp</a
+        >
+      </div>
+      <p>© <span id="year"></span> DRIPSTARS.COM. All rights reserved.</p>
+    </footer>
+
+    <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
+      <div class="drawer-header">
+        <h2>Your cart</h2>
+        <button class="close-btn" id="cartClose">×</button>
+      </div>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-footer">
+        <div class="cart-total">
+          <span>Subtotal</span><strong id="cartTotal">R0</strong>
         </div>
+        <button class="btn btn-gold full" id="checkoutBtn">
+          Proceed to order
+        </button>
+        <button class="btn btn-outline dark-outline full" id="whatsappCartBtn">
+          Order cart via WhatsApp
+        </button>
+        <small
+          >Bank payment instructions can be shown during the order process. Do
+          not publish account details on the public homepage.</small
+        >
       </div>
-      <div class="product-grid" id="productGrid"></div>
-      <p class="empty-state" id="emptyState" hidden>No products match your search.</p>
-    </section>
+    </aside>
+    <div class="overlay" id="overlay"></div>
 
-    <section class="deal-banner" id="laptops">
-      <div>
-        <p class="eyebrow">LIMITED DEAL</p>
-        <h2>Lenovo laptop<br><span>R4,500</span></h2>
-        <p>i5 • 256GB SSD • 8GB RAM</p>
+    <div class="modal" id="checkoutModal">
+      <div class="modal-card">
+        <button class="close-btn modal-close" id="checkoutClose">×</button>
+        <p class="eyebrow">ORDER DETAILS</p>
+        <h2>Complete your order</h2>
+        <form id="checkoutForm">
+          <label>Full name<input required name="name" /></label>
+          <label
+            >Phone / WhatsApp number<input required name="phone" type="tel"
+          /></label>
+          <label
+            >Email address<input required name="email" type="email"
+          /></label>
+          <label
+            >Delivery address<textarea
+              required
+              name="address"
+              rows="3"
+            ></textarea>
+          </label>
+          <label
+            >Delivery method
+            <select name="delivery">
+              <option>PostNet counter-to-counter</option>
+              <option>Courier Guy door-to-door</option>
+              <option>Collect in person</option>
+            </select>
+          </label>
+          <label
+            >Payment method
+            <select name="payment">
+              <option>Bank transfer</option>
+              <option>Contact me about payment</option>
+            </select>
+          </label>
+          <button class="btn btn-gold full" type="submit">
+            Submit order request
+          </button>
+        </form>
+        <p class="form-note">
+          Submitting sends your order and delivery preference straight to
+          DRIPSTARS.COM via WhatsApp. Delivery cost is confirmed with you
+          directly once your area and courier option are checked.
+        </p>
       </div>
-      <div class="deal-device">LAPTOP</div>
-      <button class="btn btn-gold" data-product="Lenovo i5 Laptop">Add to cart</button>
-    </section>
+    </div>
 
-    <section class="trust section" id="about">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">WHY DRIPSTARS</p>
-          <h2>Simple shopping. Real support.</h2>
-        </div>
+    <div class="modal" id="detailModal">
+      <div class="modal-card detail-card">
+        <button class="close-btn modal-close" id="detailClose">×</button>
+        <div id="detailContent"></div>
       </div>
-      <div class="trust-grid">
-        <article><span>01</span><h3>Shop online</h3><p>Choose your products and build your order from the website.</p></article>
-        <article><span>02</span><h3>WhatsApp option</h3><p>Prefer a direct conversation? Send your order or enquiry through WhatsApp.</p></article>
-        <article><span>03</span><h3>Nationwide delivery</h3><p>Delivery information can be confirmed with your order before dispatch.</p></article>
-      </div>
-    </section>
-
-    <section class="contact-strip">
-      <div>
-        <p class="eyebrow">NEED HELP?</p>
-        <h2>Talk to DRIPSTARS.COM.</h2>
-      </div>
-      <a class="btn btn-gold" href="https://wa.me/27838614484?text=Hi%20DRIPSTARS.COM%2C%20I%20need%20help%20with%20an%20order." target="_blank" rel="noopener">Chat on WhatsApp</a>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="brand footer-brand">
-      <span class="brand-mark">★</span>
-      <span><strong>DRIPSTARS<span>.COM</span></strong><small>WHERE STYLE MEETS TECH</small></span>
     </div>
-    <div class="footer-links">
-      <a href="#shop">Shop</a>
-      <a href="#about">About</a>
-      <a href="https://wa.me/27838614484" target="_blank" rel="noopener">WhatsApp</a>
-    </div>
-    <p>© <span id="year"></span> DRIPSTARS.COM. All rights reserved.</p>
-  </footer>
 
-  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart">
-    <div class="drawer-header">
-      <h2>Your cart</h2>
-      <button class="close-btn" id="cartClose">×</button>
-    </div>
-    <div id="cartItems" class="cart-items"></div>
-    <div class="cart-footer">
-      <div class="cart-total"><span>Subtotal</span><strong id="cartTotal">R0</strong></div>
-      <button class="btn btn-gold full" id="checkoutBtn">Proceed to order</button>
-      <button class="btn btn-outline dark-outline full" id="whatsappCartBtn">Order cart via WhatsApp</button>
-      <small>Bank payment instructions can be shown during the order process. Do not publish account details on the public homepage.</small>
-    </div>
-  </aside>
-  <div class="overlay" id="overlay"></div>
-
-  <div class="modal" id="checkoutModal">
-    <div class="modal-card">
-      <button class="close-btn modal-close" id="checkoutClose">×</button>
-      <p class="eyebrow">ORDER DETAILS</p>
-      <h2>Complete your order</h2>
-      <form id="checkoutForm">
-        <label>Full name<input required name="name" /></label>
-        <label>Phone / WhatsApp number<input required name="phone" type="tel" /></label>
-        <label>Email address<input required name="email" type="email" /></label>
-        <label>Delivery address<textarea required name="address" rows="3"></textarea></label>
-        <label>Payment method
-          <select name="payment">
-            <option>Bank transfer</option>
-            <option>Contact me about payment</option>
-          </select>
-        </label>
-        <button class="btn btn-gold full" type="submit">Submit order request</button>
-      </form>
-      <p class="form-note">This first version records the order request on the customer side and prepares the information for business processing. A real backend/payment gateway can be connected later.</p>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+  </body>
 </html>
