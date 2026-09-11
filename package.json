@@ -1,0 +1,9 @@
+{
+    "name": "dripstars-com",
+    "version": "1.0.0",
+    "description": "Full-stack e-commerce site for DRIPSTARS.COM — vanilla JS frontend, Supabase backend.",
+    "scripts": {
+      "test": "node --test tests/utils.test.js"
+    },
+    "license": "MIT"
+  }

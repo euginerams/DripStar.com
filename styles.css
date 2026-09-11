@@ -219,9 +219,6 @@ h3 {
     padding: 9px 10px;
   }
 }
-.cart-btn:hover {
-  border-color: var(--gold-light);
-}
 .cart-btn #cartCount {
   display: inline-grid;
   place-items: center;
@@ -346,6 +343,32 @@ h3 {
   padding: 11px 14px;
   font-size: 12.5px;
   color: #a33;
+}
+
+/* ---------- Student Sale badge (integrated into hero) ---------- */
+.student-sale-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid rgba(216, 180, 110, 0.45);
+  background: rgba(216, 180, 110, 0.08);
+  color: var(--gold-light);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 999px;
+  margin-bottom: 18px;
+  transition: border-color 0.15s, background 0.15s;
+}
+.student-sale-badge:hover {
+  border-color: var(--gold-light);
+  background: rgba(216, 180, 110, 0.14);
+}
+.student-sale-badge-script {
+  font-family: "Dancing Script", cursive;
+  font-weight: 700;
+  font-size: 1.25em;
+  line-height: 1;
 }
 
 /* ---------- Hero ---------- */
@@ -727,7 +750,7 @@ h3 {
 }
 .product-image {
   aspect-ratio: 4/3;
-  background: linear-gradient(150deg, var(--paper-dim), #fff);
+  background: var(--white);
   display: grid;
   place-items: center;
   position: relative;
@@ -743,6 +766,9 @@ h3 {
     inset 6px 6px 16px rgba(255, 255, 255, 0.14),
     10px 12px 28px rgba(21, 18, 13, 0.18);
 }
+.product-image.photo-loaded:before {
+  display: none;
+}
 .product-image.laptop:before {
   width: 64%;
   height: 46%;
@@ -751,18 +777,45 @@ h3 {
     inset 6px 6px 16px rgba(255, 255, 255, 0.14),
     0 16px 22px rgba(21, 18, 13, 0.2);
 }
-.product-image.tablet:before {
-  width: 62%;
+.product-image.sneaker:before {
+  width: 60%;
+  height: 34%;
+  border-radius: 50% 50% 35% 45% / 65% 65% 35% 35%;
+}
+.product-image.perfume:before {
+  width: 30%;
   height: 56%;
-  border-radius: 12%;
+  border-radius: 10% 10% 22% 22%;
+}
+.product-image.shirt:before {
+  width: 56%;
+  height: 60%;
+  border-radius: 14% 14% 10% 10%;
+  clip-path: polygon(
+    20% 0%,
+    35% 0%,
+    50% 12%,
+    65% 0%,
+    80% 0%,
+    100% 22%,
+    85% 34%,
+    78% 28%,
+    78% 100%,
+    22% 100%,
+    22% 28%,
+    15% 34%,
+    0% 22%
+  );
 }
 .product-photo {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: inherit;
+  padding: 8%;
+  box-sizing: border-box;
 }
 .product-info {
   padding: 16px 18px 18px;
@@ -1067,6 +1120,7 @@ h3 {
   position: absolute;
   right: 18px;
   top: 14px;
+  z-index: 5;
 }
 .modal-card h2 {
   margin: 0 0 20px;
@@ -1099,6 +1153,265 @@ h3 {
   line-height: 1.5;
 }
 
+/* ---------- Logged-in checkout flow ---------- */
+.checkout-section {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.checkout-section:last-of-type {
+  border-bottom: 0;
+}
+.checkout-section h4 {
+  margin: 0 0 10px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--slate);
+}
+.checkout-summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.checkout-summary-row strong {
+  display: block;
+  font-size: 15px;
+}
+.checkout-sub {
+  display: block;
+  color: var(--slate);
+  font-size: 12.5px;
+  margin-top: 2px;
+}
+.checkout-edit-fields {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.checkout-edit-fields label {
+  font-size: 12px;
+  font-weight: 700;
+}
+.checkout-edit-fields input {
+  width: 100%;
+  margin-top: 5px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  outline: none;
+}
+.checkout-edit-fields button {
+  align-self: flex-start;
+  margin-top: 2px;
+}
+.link-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--gold);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.link-btn:hover {
+  color: var(--ink);
+}
+
+.address-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.address-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.address-option:hover {
+  border-color: var(--ink);
+}
+.address-option.selected {
+  border-color: var(--gold);
+  background: var(--paper-dim);
+}
+.address-option input {
+  margin-top: 3px;
+}
+.address-option strong {
+  display: block;
+  font-size: 13.5px;
+}
+.address-option small {
+  display: block;
+  color: var(--slate);
+  font-size: 12px;
+  margin-top: 2px;
+}
+.address-method-tag {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+  background: var(--paper-dim);
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+.new-address-form {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.new-address-form label {
+  font-size: 12px;
+  font-weight: 700;
+}
+.new-address-form input,
+.new-address-form textarea {
+  width: 100%;
+  margin-top: 5px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  outline: none;
+}
+.checkout-note {
+  font-size: 11.5px;
+  color: var(--slate);
+  line-height: 1.5;
+  margin: 10px 0 0;
+}
+
+/* ---------- Step-by-step delivery flow ---------- */
+.step-instruction {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 14px;
+}
+.method-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.method-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+  background: var(--white);
+  cursor: pointer;
+  transition: 0.15s;
+  text-align: left;
+}
+.method-card:hover {
+  border-color: var(--gold);
+  background: var(--paper-dim);
+}
+.method-card-icon {
+  font-size: 20px;
+  margin-bottom: 2px;
+}
+.method-card strong {
+  font-size: 14px;
+}
+.method-card small {
+  color: var(--slate);
+  font-size: 12.5px;
+}
+
+/* ---------- Payment section ---------- */
+.bank-details-card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px 16px;
+  background: var(--paper-dim);
+  margin-bottom: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 16px;
+}
+.bank-details-card div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.bank-details-card span {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--slate);
+}
+.bank-details-card strong {
+  font-size: 13.5px;
+}
+
+.payment-choice {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.payment-choice-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: 0.15s;
+}
+.payment-choice-option:hover {
+  border-color: var(--ink);
+}
+.payment-choice-option.selected {
+  border-color: var(--gold);
+  background: var(--paper-dim);
+}
+.payment-choice-option input {
+  margin-top: 3px;
+}
+.payment-choice-option strong {
+  display: block;
+  font-size: 13.5px;
+}
+.payment-choice-option small {
+  display: block;
+  color: var(--slate);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.proof-upload-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin: 4px 0 14px;
+}
+.proof-upload-label input[type="file"] {
+  width: 100%;
+  margin-top: 8px;
+  border: 1px dashed var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 12.5px;
+  background: var(--white);
+}
+
 /* ---------- Condition badges & product detail modal ---------- */
 .condition-badge {
   position: absolute;
@@ -1119,6 +1432,23 @@ h3 {
   background: #8a5a20;
 }
 .detail-card .condition-badge {
+  position: static;
+  display: inline-block;
+}
+.coming-soon-badge {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 5px;
+  color: #fff;
+  background: var(--gold);
+}
+.detail-card .coming-soon-badge {
   position: static;
   display: inline-block;
 }
@@ -1199,17 +1529,22 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 220px;
+  min-height: 260px;
   margin: -6px 0 18px;
   border-radius: 12px;
-  background: radial-gradient(circle at 70% 30%, #2b2418, #15120d 70%);
+  background: var(--white);
+  border: 1px solid var(--line);
   overflow: hidden;
+  padding: 16px;
+  box-sizing: border-box;
 }
 .detail-photo {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 12px;
+  max-width: 100%;
+  max-height: min(60vh, 420px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
 }
 .detail-device {
   --device-color: #4a4238;
@@ -1250,10 +1585,60 @@ h3 {
   background: rgba(0, 0, 0, 0.2);
   border-radius: 0 0 8px 8px;
 }
-.detail-device-tablet {
-  width: 170px;
-  height: 220px;
-  border-radius: 18px;
+.detail-device-sneaker {
+  width: 220px;
+  height: 100px;
+  align-self: center;
+  border-radius: 50% 50% 35% 45% / 70% 70% 30% 30%;
+  position: relative;
+}
+.detail-device-sneaker:after {
+  content: "";
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  bottom: -8px;
+  height: 14px;
+  background: rgba(0, 0, 0, 0.35);
+  border-radius: 0 0 14px 14px;
+}
+.detail-device-perfume {
+  width: 100px;
+  height: 190px;
+  align-self: center;
+  border-radius: 10px 10px 20px 20px;
+  position: relative;
+}
+.detail-device-perfume:before {
+  content: "";
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34px;
+  height: 26px;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 4px 4px 0 0;
+}
+.detail-device-shirt {
+  width: 190px;
+  height: 200px;
+  align-self: center;
+  clip-path: polygon(
+    20% 0%,
+    35% 0%,
+    50% 12%,
+    65% 0%,
+    80% 0%,
+    100% 22%,
+    85% 34%,
+    78% 28%,
+    78% 100%,
+    22% 100%,
+    22% 28%,
+    15% 34%,
+    0% 22%
+  );
 }
 
 /* ---------- Responsive ---------- */

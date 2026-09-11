@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="DRIPSTARS.COM - Where Style Meets Tech. Shop phones, tablets and laptops."
+      content="DRIPSTARS.COM - Where Style Meets Tech. Shop iPhones, laptops, sneakers, jerseys and perfumes."
     />
     <title>DRIPSTARS.COM | Where Style Meets Tech</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -40,7 +40,9 @@
         <a href="#shop">Shop</a>
         <a href="#phones" data-filter="Phone">Phones</a>
         <a href="#phones" data-filter="Laptop">Laptops</a>
-        <a href="#phones" data-filter="Tablet">Tablets</a>
+        <a href="#phones" data-filter="Sneaker">Sneakers</a>
+        <a href="#phones" data-filter="Shirt">Jerseys</a>
+        <a href="#phones" data-filter="Perfume">Perfumes</a>
         <a href="#about">About</a>
       </nav>
 
@@ -65,12 +67,13 @@
         <input
           id="searchInput"
           type="search"
-          placeholder="Try 'Phone', 'Laptop', 'Tablet', or a product name..."
+          placeholder="Try 'Phone', 'Laptop', 'Sneaker', 'Shirt', 'Perfume', or a product name..."
           autocomplete="off"
         />
         <div class="search-suggestions" id="searchSuggestions" hidden></div>
         <p class="search-invalid-msg" id="searchInvalidMsg" hidden>
-          No matches found. Try "Phone", "Laptop" or "Tablet".
+          No matches found. Try "Phone", "Laptop", "Sneaker", "Shirt" or
+          "Perfume".
         </p>
       </div>
     </div>
@@ -78,11 +81,16 @@
     <main id="home">
       <section class="hero">
         <div class="hero-copy">
+          <a class="student-sale-badge" href="#shop"
+            >🎓 <span class="student-sale-badge-script">Student</span> Sale —
+            live now</a
+          >
           <p class="eyebrow">TECH THAT FITS YOUR STYLE</p>
           <h1>Upgrade your<br /><span>everyday tech.</span></h1>
           <p class="hero-text">
-            Shop phones, laptops and tablets from DRIPSTARS.COM. Order online or
-            use WhatsApp when you prefer a direct conversation.
+            Shop iPhones, laptops, sneakers, jerseys and perfumes from
+            DRIPSTARS.COM. Order online or use WhatsApp when you prefer a direct
+            conversation.
           </p>
           <div class="hero-actions">
             <a class="btn btn-gold" href="#shop">Shop now</a>
@@ -131,9 +139,22 @@
               ><small>Work & everyday computing</small></span
             >
           </button>
-          <button class="category-card" data-filter="Tablet">
-            <span class="category-icon">▣</span>
-            <span><strong>Tablets</strong><small>Portable screens</small></span>
+          <button class="category-card" data-filter="Sneaker">
+            <span class="category-icon">👟</span>
+            <span
+              ><strong>Sneakers</strong
+              ><small>Fresh kicks, new arrivals</small></span
+            >
+          </button>
+          <button class="category-card" data-filter="Shirt">
+            <span class="category-icon">👕</span>
+            <span><strong>Jerseys</strong><small>Soccer shirts</small></span>
+          </button>
+          <button class="category-card" data-filter="Perfume">
+            <span class="category-icon">🧴</span>
+            <span
+              ><strong>Perfumes</strong><small>Signature scents</small></span
+            >
           </button>
         </div>
       </section>
@@ -148,7 +169,9 @@
             <button class="filter active" data-filter="All">All</button>
             <button class="filter" data-filter="Phone">Phones</button>
             <button class="filter" data-filter="Laptop">Laptops</button>
-            <button class="filter" data-filter="Tablet">Tablets</button>
+            <button class="filter" data-filter="Sneaker">Sneakers</button>
+            <button class="filter" data-filter="Shirt">Jerseys</button>
+            <button class="filter" data-filter="Perfume">Perfumes</button>
             <button class="filter-toggle" id="filterToggle">
               Filters <span id="filterCount"></span> ▾
             </button>
@@ -213,11 +236,11 @@
       <section class="deal-banner" id="laptops">
         <div>
           <p class="eyebrow">LIMITED DEAL</p>
-          <h2>Lenovo IdeaPad 3<br /><span>R4,500</span></h2>
+          <h2>Lenovo i5 Laptop<br /><span>R4,500</span></h2>
           <p>i5 • 256GB SSD • 8GB RAM</p>
         </div>
         <div class="deal-device">LAPTOP</div>
-        <button class="btn btn-gold" onclick="addToCart(17)">
+        <button class="btn btn-gold" onclick="addToCart(58)">
           Add to cart
         </button>
       </section>
@@ -306,11 +329,11 @@
           Proceed to order
         </button>
         <button class="btn btn-outline dark-outline full" id="whatsappCartBtn">
-          Order cart via WhatsApp
+          Enquire on WhatsApp (no account needed)
         </button>
         <small
-          >Bank payment instructions can be shown during the order process. Do
-          not publish account details on the public homepage.</small
+          >Proceeding to order requires signing in — your cart is saved, so you
+          won't lose it.</small
         >
       </div>
     </aside>
@@ -320,46 +343,8 @@
       <div class="modal-card">
         <button class="close-btn modal-close" id="checkoutClose">×</button>
         <p class="eyebrow">ORDER DETAILS</p>
-        <h2>Complete your order</h2>
-        <form id="checkoutForm">
-          <label>Full name<input required name="name" /></label>
-          <label
-            >Phone / WhatsApp number<input required name="phone" type="tel"
-          /></label>
-          <label
-            >Email address<input required name="email" type="email"
-          /></label>
-          <label
-            >Delivery address<textarea
-              required
-              name="address"
-              rows="3"
-            ></textarea>
-          </label>
-          <label
-            >Delivery method
-            <select name="delivery">
-              <option>PostNet counter-to-counter</option>
-              <option>Courier Guy door-to-door</option>
-              <option>Collect in person</option>
-            </select>
-          </label>
-          <label
-            >Payment method
-            <select name="payment">
-              <option>Bank transfer</option>
-              <option>Contact me about payment</option>
-            </select>
-          </label>
-          <button class="btn btn-gold full" type="submit">
-            Submit order request
-          </button>
-        </form>
-        <p class="form-note">
-          Submitting sends your order and delivery preference straight to
-          DRIPSTARS.COM via WhatsApp. Delivery cost is confirmed with you
-          directly once your area and courier option are checked.
-        </p>
+        <h2>Confirm your order</h2>
+        <div id="checkoutContent"></div>
       </div>
     </div>
 
@@ -371,6 +356,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="utils.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

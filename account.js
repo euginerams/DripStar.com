@@ -17,7 +17,6 @@
      console.error("Supabase failed to initialize:", err);
    }
    
-   const money = n => `R${Number(n).toLocaleString("en-ZA")}`;
    
    // ---------------- Tabs ----------------
    
@@ -59,13 +58,15 @@
      document.getElementById("dashboard").hidden = false;
      document.getElementById("redirectScreen").hidden = true;
      loadProfile();
+     loadAddresses();
      loadOrders();
    }
    
-   function showRedirecting() {
+   function showRedirecting(message){
      document.getElementById("authScreen").hidden = true;
      document.getElementById("dashboard").hidden = true;
      document.getElementById("redirectScreen").hidden = false;
+     document.getElementById("redirectMessage").textContent = message || "Redirecting...";
    }
    
    // After a successful login, decide: owner -> admin.html, customer -> dashboard here
@@ -86,8 +87,11 @@
      }
    
      if (profile && profile.is_owner) {
-       showRedirecting();
+       showRedirecting("Signing you in to the owner dashboard...");
        window.location.href = "admin.html";
+     } else if (sessionStorage.getItem("dripstars-pending-checkout") === "1") {
+       showRedirecting("Taking you back to your order...");
+       window.location.href = "index.html";
      } else {
        showDashboard();
      }
@@ -254,8 +258,6 @@
      document.getElementById("profileName").value = profile.full_name || "";
      document.getElementById("profilePhone").value = profile.phone || "";
      document.getElementById("profileEmail").value = profile.email || user.email || "";
-     document.getElementById("profileAddress").value = profile.delivery_address || "";
-     document.getElementById("profileDelivery").value = profile.delivery_method || "PostNet counter-to-counter";
    }
    
    document.getElementById("profileForm").addEventListener("submit", async (e) => {
@@ -268,14 +270,100 @@
    
      const { error } = await sb.from("profiles").update({
        full_name: document.getElementById("profileName").value,
-       phone: document.getElementById("profilePhone").value,
-       delivery_address: document.getElementById("profileAddress").value,
-       delivery_method: document.getElementById("profileDelivery").value
+       phone: document.getElementById("profilePhone").value
      }).eq("id", user.id);
    
      if (!error) {
        savedMsg.hidden = false;
        setTimeout(() => savedMsg.hidden = true, 3000);
+     }
+   });
+   
+   // ---------------- Saved addresses ----------------
+   
+   async function loadAddresses() {
+     const { data: { user } } = await sb.auth.getUser();
+     if (!user) return;
+   
+     const { data: addresses, error } = await sb
+       .from("addresses")
+       .select("*")
+       .eq("user_id", user.id)
+       .order("created_at", { ascending: true });
+   
+     if (error) { console.error(error); return; }
+     renderAddresses(addresses || []);
+   }
+   
+   function renderAddresses(addresses) {
+     const list = document.getElementById("addressesList");
+     const empty = document.getElementById("addressesEmpty");
+   
+     if (!addresses.length) {
+       empty.hidden = false;
+       list.innerHTML = "";
+       return;
+     }
+     empty.hidden = true;
+     list.innerHTML = addresses.map(a => `
+       <div class="address-card">
+         <div>
+           <strong>${a.label}</strong>
+           <p>${a.address}</p>
+           <small>${a.delivery_method || ""}</small>
+         </div>
+         <button type="button" class="link-btn" data-remove-address="${a.id}">Remove</button>
+       </div>
+     `).join("");
+   
+     list.querySelectorAll("[data-remove-address]").forEach(btn => {
+       btn.addEventListener("click", async () => {
+         const { error } = await sb.from("addresses").delete().eq("id", btn.dataset.removeAddress);
+         if (!error) loadAddresses();
+       });
+     });
+   }
+   
+   const ADDRESS_FIELD_INFO = {
+     "Paxi (PEP store)": { label: "Nearest PEP store", placeholder: "e.g. PEP Sandton City" },
+     "The Courier Guy": { label: "Delivery address", placeholder: "Street address, suburb, city, postal code" },
+     "PostNet": { label: "Nearest PostNet branch", placeholder: "e.g. PostNet Rosebank" }
+   };
+   
+   function updateAddressFieldLabel() {
+     const method = document.getElementById("newAddressMethod").value;
+     const info = ADDRESS_FIELD_INFO[method];
+     document.getElementById("newAddressFieldLabel").textContent = info.label;
+     document.getElementById("newAddressText").placeholder = info.placeholder;
+   }
+   
+   document.getElementById("newAddressMethod").addEventListener("change", updateAddressFieldLabel);
+   
+   document.getElementById("addAddressBtn").addEventListener("click", () => {
+     document.getElementById("newAddressForm").hidden = false;
+     document.getElementById("addAddressBtn").hidden = true;
+     updateAddressFieldLabel();
+   });
+   document.getElementById("cancelAddAddressBtn").addEventListener("click", () => {
+     document.getElementById("newAddressForm").hidden = true;
+     document.getElementById("addAddressBtn").hidden = false;
+     document.getElementById("newAddressForm").reset();
+   });
+   document.getElementById("newAddressForm").addEventListener("submit", async (e) => {
+     e.preventDefault();
+     const { data: { user } } = await sb.auth.getUser();
+     if (!user) return;
+   
+     const label = document.getElementById("newAddressLabel").value.trim();
+     const address = document.getElementById("newAddressText").value.trim();
+     const delivery_method = document.getElementById("newAddressMethod").value;
+   
+     const { error } = await sb.from("addresses").insert({ user_id: user.id, label, address, delivery_method });
+     if (!error) {
+       document.getElementById("newAddressForm").reset();
+       document.getElementById("newAddressForm").hidden = true;
+       document.getElementById("addAddressBtn").hidden = false;
+       loadAddresses();
      }
    });
    

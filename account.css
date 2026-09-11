@@ -186,6 +186,39 @@ a {
   color: var(--status-completed);
 }
 
+.verify-copy {
+  font-size: 13.5px;
+  color: var(--slate);
+  line-height: 1.6;
+  margin: 0 0 4px;
+}
+#verifyCode {
+  letter-spacing: 6px;
+  font-size: 20px;
+  text-align: center;
+  font-family: "JetBrains Mono", monospace;
+}
+.verify-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.link-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--gold);
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.link-btn:hover {
+  color: var(--ink);
+}
+
 .redirect-screen {
   min-height: 100vh;
   display: grid;
@@ -289,6 +322,62 @@ a {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.address-manage-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.address-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.address-card strong {
+  display: block;
+  font-size: 13.5px;
+}
+.address-card p {
+  margin: 4px 0 2px;
+  font-size: 13px;
+  color: var(--slate);
+  line-height: 1.5;
+}
+.address-card small {
+  color: var(--slate);
+  font-size: 11.5px;
+}
+.new-address-form {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.new-address-form label {
+  font-size: 12px;
+  font-weight: 700;
+}
+.new-address-form input,
+.new-address-form textarea,
+.new-address-form select {
+  width: 100%;
+  margin-top: 5px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  outline: none;
+  background: #fff;
+}
+.address-form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
 }
 .order-card {
   border: 1px solid var(--line);

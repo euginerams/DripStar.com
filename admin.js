@@ -21,7 +21,6 @@
    let searchTerm = "";
    let statusFilter = "All";
    
-   const money = n => `R${Number(n).toLocaleString("en-ZA")}`;
    
    // ---------------- Access check ----------------
    
@@ -177,7 +176,15 @@
          <h4>Delivery</h4>
          <p class="detail-line">${o.delivery_address}</p>
          <p class="detail-line">${o.delivery_method}</p>
-         <p class="detail-line">Payment: ${o.payment_method}</p>
+       </div>
+       <div class="detail-section">
+         <h4>Payment</h4>
+         <p class="detail-line">${o.payment_method}</p>
+         <p class="detail-line">Status: <strong>${o.payment_status || "Awaiting payment"}</strong></p>
+         ${o.proof_of_payment_path
+           ? `<button type="button" class="btn btn-outline dark-outline" id="viewProofBtn">View proof of payment</button>
+              <p class="checkout-note" id="proofError" hidden>Could not open the file — it may have been removed.</p>`
+           : `<p class="checkout-note">No proof of payment uploaded yet.</p>`}
        </div>
        <div class="detail-section">
          <h4>Items</h4>
@@ -189,6 +196,19 @@
          <div class="detail-total"><span>Total</span><span>${money(o.total)}</span></div>
        </div>
      `;
+   
+     if (o.proof_of_payment_path){
+       document.getElementById("viewProofBtn").addEventListener("click", async () => {
+         const { data, error } = await sb.storage
+           .from("proof-of-payments")
+           .createSignedUrl(o.proof_of_payment_path, 60 * 5); // link valid 5 minutes
+         if (error || !data) {
+           document.getElementById("proofError").hidden = false;
+           return;
+         }
+         window.open(data.signedUrl, "_blank");
+       });
+     }
    
      document.getElementById("statusSelect").addEventListener("change", async (e) => {
        const newStatus = e.target.value;

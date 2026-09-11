@@ -1,5 +1,6 @@
 :root {
   --ink: #15120d;
+  --ink-soft: #2a241b;
   --paper: #f7f3ea;
   --paper-dim: #efe9db;
   --white: #ffffff;
@@ -11,6 +12,7 @@
   --shadow: 0 24px 60px rgba(21, 18, 13, 0.16);
   --shadow-soft: 0 10px 30px rgba(21, 18, 13, 0.08);
   --radius: 14px;
+
   --status-pending: #b3813c;
   --status-confirmed: #3f6b8a;
   --status-shipped: #6b5b95;
@@ -38,17 +40,12 @@ h2 {
 }
 button,
 input,
-select,
-textarea {
+select {
   font: inherit;
   color: inherit;
 }
 button {
   cursor: pointer;
-}
-a {
-  color: inherit;
-  text-decoration: none;
 }
 
 .eyebrow {
@@ -91,8 +88,8 @@ a {
   width: 100%;
 }
 
-/* ---------- Auth screen ---------- */
-.auth-screen {
+/* ---------- Access check screen ---------- */
+.access-screen {
   min-height: 100vh;
   display: grid;
   place-items: center;
@@ -102,240 +99,140 @@ a {
     #1d1710 30%,
     var(--ink) 62%
   );
-  padding: 20px;
-}
-.auth-card {
-  width: min(420px, 100%);
-  background: var(--white);
-  border-radius: 18px;
-  padding: 36px 32px;
-  box-shadow: var(--shadow);
-  position: relative;
-}
-.back-link {
-  display: inline-block;
-  font-size: 12.5px;
-  color: var(--slate);
-  margin-bottom: 18px;
-}
-.back-link:hover {
-  color: var(--ink);
-}
-.auth-card h1 {
-  font-size: 1.5rem;
-  margin-bottom: 18px;
-}
-
-.auth-tabs {
-  display: flex;
-  gap: 6px;
-  background: var(--paper-dim);
-  border-radius: 10px;
-  padding: 4px;
-  margin-bottom: 22px;
-}
-.auth-tab {
-  flex: 1;
-  background: transparent;
-  border: 0;
-  border-radius: 8px;
-  padding: 10px;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--slate);
-}
-.auth-tab.active {
-  background: var(--white);
-  color: var(--ink);
-  box-shadow: var(--shadow-soft);
-}
-
-.auth-form label {
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  margin: 14px 0 0;
-}
-.auth-form input,
-.auth-form textarea,
-.auth-form select {
-  width: 100%;
-  margin-top: 6px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 11px 12px;
-  outline: none;
-}
-.auth-form input:focus,
-.auth-form textarea:focus,
-.auth-form select:focus {
-  border-color: var(--gold);
-}
-.auth-form button {
-  margin-top: 22px;
-}
-
-.auth-msg {
-  font-size: 12.5px;
-  margin: 12px 0 0;
-}
-.auth-error {
-  color: var(--status-cancelled);
-}
-.auth-success {
-  color: var(--status-completed);
-}
-
-.verify-copy {
-  font-size: 13.5px;
-  color: var(--slate);
-  line-height: 1.6;
-  margin: 0 0 4px;
-}
-#verifyCode {
-  letter-spacing: 6px;
-  font-size: 20px;
-  text-align: center;
-  font-family: "JetBrains Mono", monospace;
-}
-.verify-links {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 16px;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.link-btn {
-  background: none;
-  border: 0;
-  padding: 0;
-  color: var(--gold);
-  font-size: 12.5px;
-  font-weight: 600;
-  text-decoration: underline;
-  cursor: pointer;
-}
-.link-btn:hover {
-  color: var(--ink);
-}
-
-.redirect-screen {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  background: var(--ink);
   color: var(--gold-pale);
   font-size: 14px;
+  padding: 20px;
+  text-align: center;
 }
 
-/* ---------- Dashboard ---------- */
-.account-top {
+/* ---------- Top bar ---------- */
+.admin-top {
   background: var(--ink);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 16px clamp(16px, 4vw, 40px);
-  gap: 14px;
-  flex-wrap: wrap;
 }
-.account-brand strong {
+.admin-brand strong {
   font-family: "Fraunces", serif;
   font-size: 16px;
 }
-.account-brand strong span {
+.admin-brand strong span {
   color: var(--gold-light);
 }
-.account-brand small {
+.admin-brand small {
   display: block;
   color: #b9b2a2;
   font-size: 9px;
   letter-spacing: 0.16em;
   margin-top: 2px;
 }
-.account-top-actions {
-  display: flex;
-  gap: 10px;
-}
-.account-top .btn-outline {
+.admin-top .btn-outline {
   border-color: rgba(255, 255, 255, 0.3);
   color: #fff;
 }
-.account-top .btn-outline:hover {
+.admin-top .btn-outline:hover {
   border-color: var(--gold-light);
   color: var(--gold-light);
 }
 
-.account-main {
-  max-width: 800px;
+.admin-main {
+  max-width: 1200px;
   margin: 0 auto;
   padding: clamp(20px, 4vw, 36px);
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
 }
-.account-section {
+
+/* ---------- Stat cards ---------- */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.stat-card {
   background: var(--white);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 24px;
+  padding: 18px 20px;
 }
-.account-section h2 {
-  font-size: 1.2rem;
-  margin-bottom: 16px;
+.stat-label {
+  display: block;
+  font-size: 11px;
+  color: var(--slate);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.stat-value {
+  display: block;
+  font-family: "Fraunces", serif;
+  font-size: 26px;
+  margin-top: 8px;
 }
 
-.profile-form label {
-  display: block;
-  font-size: 12px;
-  font-weight: 700;
-  margin: 14px 0 0;
+/* ---------- Toolbar ---------- */
+.toolbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
 }
-.profile-form label:first-child {
-  margin-top: 0;
-}
-.profile-form input,
-.profile-form textarea,
-.profile-form select {
-  width: 100%;
-  margin-top: 6px;
+.toolbar input[type="search"] {
+  flex: 1;
+  min-width: 220px;
   border: 1px solid var(--line);
-  border-radius: 8px;
-  padding: 11px 12px;
-  outline: none;
+  border-radius: 9px;
+  padding: 11px 14px;
   background: var(--white);
 }
-.profile-form input:disabled {
-  background: var(--paper-dim);
-  color: var(--slate);
+.toolbar select {
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  padding: 11px 14px;
+  background: var(--white);
 }
-.profile-form input:focus,
-.profile-form textarea:focus,
-.profile-form select:focus {
-  border-color: var(--gold);
-}
-.profile-form button {
-  margin-top: 18px;
+.dark-outline {
+  color: var(--ink);
+  border-color: var(--line);
 }
 
-.orders-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.order-card {
+/* ---------- Table ---------- */
+.table-wrap {
+  background: var(--white);
   border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 14px 16px;
+  border-radius: var(--radius);
+  overflow: hidden;
 }
-.order-card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 8px;
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
 }
+.orders-table th {
+  text-align: left;
+  padding: 14px 18px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--slate);
+  border-bottom: 1px solid var(--line);
+}
+.orders-table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+.orders-table tr:last-child td {
+  border-bottom: none;
+}
+.orders-table tbody tr {
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.orders-table tbody tr:hover {
+  background: var(--paper-dim);
+}
+
 .order-chip {
   font-family: "JetBrains Mono", monospace;
   font-weight: 600;
@@ -344,7 +241,21 @@ a {
   color: #6b4d1f;
   border-radius: 6px;
   padding: 4px 8px;
+  display: inline-block;
 }
+.cust-name {
+  font-weight: 600;
+  display: block;
+}
+.cust-sub {
+  color: var(--slate);
+  font-size: 12px;
+}
+.items-preview {
+  color: var(--slate);
+  font-size: 12.5px;
+}
+
 .status-pill {
   font-size: 11px;
   font-weight: 700;
@@ -353,6 +264,7 @@ a {
   padding: 5px 10px;
   border-radius: 999px;
   color: #fff;
+  display: inline-block;
 }
 .status-pending {
   background: var(--status-pending);
@@ -369,24 +281,123 @@ a {
 .status-cancelled {
   background: var(--status-cancelled);
 }
-.order-items {
-  color: var(--slate);
-  font-size: 13px;
-  margin: 0 0 6px;
-}
-.order-total {
-  font-weight: 700;
-  font-size: 14px;
-}
-.order-date {
-  color: var(--slate);
-  font-size: 11.5px;
-  margin-top: 4px;
-}
 
 .empty-state,
 .loading-state {
   text-align: center;
   color: var(--slate);
-  padding: 24px;
+  padding: 40px;
+}
+
+/* ---------- Detail drawer (mirrors the storefront cart drawer) ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(21, 18, 13, 0.55);
+  z-index: 29;
+  display: none;
+}
+.overlay.show {
+  display: block;
+}
+.detail-drawer {
+  position: fixed;
+  z-index: 30;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: min(440px, 92vw);
+  background: #fff;
+  transform: translateX(105%);
+  transition: 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -15px 0 50px rgba(21, 18, 13, 0.25);
+}
+.detail-drawer.open {
+  transform: translateX(0);
+}
+.drawer-header {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.drawer-header h2 {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 16px;
+}
+.close-btn {
+  border: 0;
+  background: none;
+  font-size: 26px;
+  color: var(--ink);
+}
+.drawer-body {
+  padding: 20px 22px;
+  overflow: auto;
+  flex: 1;
+}
+.detail-section {
+  margin-bottom: 20px;
+}
+.detail-section h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--slate);
+  margin: 0 0 8px;
+}
+.detail-line {
+  font-size: 14px;
+  margin: 0 0 4px;
+}
+.checkout-note {
+  font-size: 11.5px;
+  color: var(--slate);
+  line-height: 1.5;
+  margin: 8px 0 0;
+}
+.detail-item-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13.5px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+}
+.detail-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 16px;
+  margin-top: 10px;
+}
+.status-select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-top: 8px;
+}
+
+@media (max-width: 700px) {
+  .orders-table thead {
+    display: none;
+  }
+  .orders-table,
+  .orders-table tbody,
+  .orders-table tr,
+  .orders-table td {
+    display: block;
+    width: 100%;
+  }
+  .orders-table tr {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .orders-table td {
+    padding: 4px 0;
+    border: 0;
+  }
 }
